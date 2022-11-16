@@ -17,8 +17,17 @@ public class UserService {
 
     public String findNameOfLastUser() {
         List<UserModel> users = userRepository.findAll();
-        UserModel lastUser = users.get(users.size() - 1);
-        String nameOfLastUser = lastUser.getName();
-        return nameOfLastUser;
+
+        if (users.size() >= 1) {
+            UserModel lastUser = users.get(users.size() - 1);
+            String nameOfLastUser = lastUser.getName();
+            return nameOfLastUser;
+        } else {
+            return "Lista vazia.";
+        }
+    }
+
+    public UserModel saveUser(UserModel userModel) {
+        return userRepository.save(userModel);
     }
 }
