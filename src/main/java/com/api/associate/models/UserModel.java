@@ -6,19 +6,23 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "TBL_USERS")
+@Table(name = "TBL_USER")
 public class UserModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+    private UUID id;
 
     @Column(nullable = false)
-    private String lastUser;
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
 }

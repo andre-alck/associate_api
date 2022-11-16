@@ -1,5 +1,7 @@
 package com.api.associate.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.api.associate.models.UserModel;
@@ -13,7 +15,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserModel getLastUser() {
-        return userRepository.findTopByOrderByIdDesc();
+    public String findNameOfLastUser() {
+        List<UserModel> users = userRepository.findAll();
+        UserModel lastUser = users.get(users.size() - 1);
+        String nameOfLastUser = lastUser.getName();
+        return nameOfLastUser;
     }
 }
