@@ -23,11 +23,15 @@ public class UserService {
             String nameOfLastUser = lastUser.getName();
             return nameOfLastUser;
         } else {
-            return "Lista vazia.";
+            return "";
         }
     }
 
-    public UserModel saveUser(UserModel userModel) {
+    public UserModel save(UserModel userModel) {
         return userRepository.save(userModel);
+    }
+
+    public void delete() {
+        userRepository.deleteAll();
     }
 }

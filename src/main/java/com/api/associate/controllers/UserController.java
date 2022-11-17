@@ -1,10 +1,15 @@
 package com.api.associate.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +36,27 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDto userDto) {
+    public ResponseEntity<Object> save(@RequestBody @Valid UserDto userDto) {
         UserModel userModel = new UserModel();
         userModel.setName(userDto.getName());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(userModel));
+        List<String> possibleUsers = new ArrayList<>();
+        possibleUsers.addAll(Arrays.asList("1",
+                "2",
+                "3",
+                "4",
+                "5"));
+
+        if (!(possibleUsers.contains(userDto.getName()))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid name.");
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userModel));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Object> delete() {
+        userService.delete();
+        return ResponseEntity.status(HttpStatus.OK).body("All entities deleted.");
     }
 }
