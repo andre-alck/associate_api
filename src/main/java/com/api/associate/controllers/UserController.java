@@ -41,11 +41,11 @@ public class UserController {
         userModel.setName(userDto.getName());
 
         List<String> possibleUsers = new ArrayList<>();
-        possibleUsers.addAll(Arrays.asList("1",
-                "2",
-                "3",
-                "4",
-                "5"));
+        possibleUsers.addAll(Arrays.asList("André",
+                "Jackeline",
+                "Julia",
+                "Kaue",
+                "Vinicius"));
 
         if (!(possibleUsers.contains(userDto.getName()))) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid name.");
